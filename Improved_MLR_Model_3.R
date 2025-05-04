@@ -50,7 +50,7 @@ qqnorm(resid_test); qqline(resid_test)
 library(car)
 vif(MLR_Model_2)
 
-#Targets, Rec and Catch % seem to be a bit on the larger side based on variable knowledge
+#Targets, Rec and Catch % seem to be a bit on the larger side based on variable knowledge (VIF > 10)
 #so we may have to cross validate and use lasso regression 
 library(glmnet)
 
