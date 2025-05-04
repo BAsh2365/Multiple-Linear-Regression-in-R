@@ -15,6 +15,13 @@ MLR_Model <- lm(
 )
 summary(MLR_Model)
 
+histogram_TTS <- MLR_Model_2$residuals
+
+hist(histogram_TTS)
+
+qqnorm(histogram_TTS)
+qqline(histogram_TTS)
+
 # 3. Predict on TEST and evaluate
 test_df$predicted_TD <- predict(MLR_Model, newdata = test_df)
 
