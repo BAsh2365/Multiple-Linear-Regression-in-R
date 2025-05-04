@@ -104,13 +104,13 @@ plot(
 )
 abline(0,1,col="blue",lwd=2)
 
-#Comparison plot fo Ridge vs Regular Trained MLR model
+#Comparison plot for Ridge vs Regular Trained MLR model
 # OLS predictions
 test_df$pred_ols <- predict(MLR_Model_2, newdata = test_df)
 
 # Ridge predictions (make sure preds_ridge is a plain numeric vector)
 test_df$pred_ridge <- as.numeric(predict(
-  final_ridge,        # your glmnet object at lambda.min
+  final_ridge,      
   newx = x_test
 ))
 
@@ -123,14 +123,14 @@ plot(
   ylab = "Actual TD",
   main = "OLS (blue) vs Ridge (red)",
   pch  = 19,
-  col  = rgb(0,0,1,0.6)   # semi‐transparent blue
+  col  = rgb(0,0,1,0.6)   
 )
 points(
   test_df$pred_ridge, test_df$TD,
   pch  = 17,
-  col  = rgb(1,0,0,0.6)   # semi‐transparent red
+  col  = rgb(1,0,0,0.6) 
 )
-abline(0,1, lty=2)        # 45° reference line
+abline(0,1, lty=2)       
 legend(
   "topleft",
   legend = c("OLS","Ridge"),
