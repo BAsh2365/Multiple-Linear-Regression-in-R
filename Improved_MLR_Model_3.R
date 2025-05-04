@@ -1,3 +1,7 @@
+library(readxl)
+Atlanta_Falcons_data <- read_excel("Atlanta_Falcons_data.xlsx")
+View(Atlanta_Falcons_data)
+
 library(tidyr)
 
 vars_needed <- c("TD", "Tgt", "Rec", "Ctch%", "Yds")
