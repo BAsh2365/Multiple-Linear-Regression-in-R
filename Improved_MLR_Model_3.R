@@ -56,7 +56,7 @@ vif(MLR_Model_2)
 #so we may have to cross validate and use lasso regression 
 library(glmnet)
 
-# 1) Build model matrix
+# 1) Build model matrix in a vector format (will have to convert to numeric later on for predictions)
 x_train <- model.matrix(TD ~ Tgt + Rec +  `Ctch%` + Yds, data=train_df)[,-1]
 y_train <- train_df$TD
 x_test  <- model.matrix(TD ~ Tgt + Rec +  `Ctch%` + Yds, data=test_df)[,-1] # the -1 gets predictor column since intercept is present
@@ -108,9 +108,9 @@ abline(0,1,col="blue",lwd=2)
 
 #Comparison plot for Ridge vs Regular Trained MLR model
 # OLS predictions
-test_df$pred_ols <- predict(MLR_Model_2, newdata = test_df)
+test_df$pred_ols <- predict(MLR_Model_2, newdata = test_df) #ordinary least squares regression (better fitted LR model)
 
-# Ridge predictions (make sure preds_ridge is a plain numeric vector)
+# Ridge predictions (preds_ridge is a plain numeric vector using as.numeric due to matrix output in step 1)
 test_df$pred_ridge <- as.numeric(predict(
   final_ridge,      
   newx = x_test
