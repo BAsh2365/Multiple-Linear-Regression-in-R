@@ -8,8 +8,8 @@ train_i  <- sample(seq_len(n), size = 0.8 * n)
 train_df <- Atlanta_Falcons_data[train_i, ]
 test_df  <- Atlanta_Falcons_data[-train_i, ]
 
-# 2. Fit your model on TRAIN only
-MLR_Model <- lm(
+
+MLR_Model_2 <- lm(
   TD   ~ Tgt + Rec + `Ctch%` + Yds,
   data = train_df
 )
@@ -23,7 +23,7 @@ qqnorm(histogram_TTS)
 qqline(histogram_TTS)
 
 # 3. Predict on TEST and evaluate
-test_df$predicted_TD <- predict(MLR_Model, newdata = test_df)
+test_df$predicted_TD <- predict(MLR_Model_2, newdata = test_df)
 
 # Basic scatter of Pred vs Actual on test set
 plot(
