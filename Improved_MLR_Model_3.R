@@ -78,7 +78,7 @@ pred_lasso <- predict(lasso_mod, x_test)
 cat("Ridge RMSE:", rmse(y_test, pred_ridge), 
     "  Lasso RMSE:", rmse(y_test, pred_lasso), "\n")
 
-#We can see that the ridge Model outperforms the lasso model for TD predicition
+#We can see that the ridge Model outperforms the lasso model for TD prediction (3.52 TDs vs 3.95 TDs)
 
 #Graphing Ridge Regression Data
 plot(cv_ridge)
