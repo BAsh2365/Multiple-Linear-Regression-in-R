@@ -15,7 +15,7 @@ train_i  <- sample(seq_len(n), size = 0.8 * n)
 train_df <- clean_df[train_i, ]
 test_df  <- clean_df[-train_i, ]
 
-# 2. Fit your model on TRAIN only
+# Fit your model on TRAIN only
 MLR_Model_2 <- lm(
   TD   ~ Tgt + Rec + `Ctch%` + Yds,
   data = train_df
@@ -29,7 +29,7 @@ hist(histogram_TTS)
 qqnorm(histogram_TTS)
 qqline(histogram_TTS)
 
-# 3. Predict on TEST and evaluate
+# Predict on TEST and evaluate
 test_df$predicted_TD <- predict(MLR_Model_2, newdata = test_df)
 
 # Basic scatter of Pred vs Actual on test set
@@ -41,16 +41,18 @@ plot(
 )
 abline(0, 1, col = "red")
 
-# 5b. Test-set residual histogram & Q-Q
+# Test-set residual histogram & Q-Q
 resid_test <- test_df$TD - test_df$predicted_TD
 hist(resid_test, main="Test Residuals", xlab="Residual")
 qqnorm(resid_test); qqline(resid_test)
 
+#-----------------------------------------------------------------------------------------------------------
 #Checking Multicollinearity
 library(car)
 vif(MLR_Model_2)
 
 #Targets, Rec and Catch % seem to be a bit on the larger side based on variable knowledge (VIF > 10)
+
 #so we may have to cross validate and use lasso regression 
 library(glmnet)
 
