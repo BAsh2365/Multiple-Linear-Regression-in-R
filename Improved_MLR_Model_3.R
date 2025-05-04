@@ -57,7 +57,7 @@ library(glmnet)
 # 1) Build model matrix
 x_train <- model.matrix(TD ~ Tgt + Rec +  `Ctch%` + Yds, data=train_df)[,-1]
 y_train <- train_df$TD
-x_test  <- model.matrix(TD ~ Tgt + Rec +  `Ctch%` + Yds, data=test_df)[,-1]
+x_test  <- model.matrix(TD ~ Tgt + Rec +  `Ctch%` + Yds, data=test_df)[,-1] # the -1 gets predictor column since intercept is present
 y_test  <- test_df$TD
 
 # 2) Ridge regression (alpha=0)
