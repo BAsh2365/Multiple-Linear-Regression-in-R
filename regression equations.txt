@@ -8,5 +8,7 @@ with yards being a close second with an effect factor of 0.00208. The other fact
 (reception targets and receptions, meaning how many times the said player was targeted for the throw, 
 and how many times they completed a given catch) 
 seem to have a negative effect, suggesting overfitting. 
-However, this is taken care of via cross-validation and Ridge regression in the improved MLR model. 
+However, this is handled via cross-validation and Ridge regression in the improved MLR model. 
+This means that all of these factors influence the number of touchdowns by varying rates based on
+test statistics performed in this module.
 
