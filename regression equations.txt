@@ -1,4 +1,4 @@
-Orginial ML model regression equation: y = −0.361 + 0.0313(Tgt) − 0.00440(Rec) +0.548(Ctch%) +0.00208(Yds)
+regression equation: y = −0.361 + 0.0313(Tgt) − 0.00440(Rec) +0.548(Ctch%) +0.00208(Yds)
 
 #y meaning y-hat for our regression equation (with beta coefficients)
 
