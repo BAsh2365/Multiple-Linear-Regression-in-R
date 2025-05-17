@@ -151,18 +151,18 @@ Our VIF (Variance Inflation Factor, found using car package in R) is displayed a
 
 We see that the VIF \> 10 (a rule of thumb is that if the VF is greater than 5-10, it indicates high multicollinearity). This is not ideal for this scenario because the variables need to be standardized to account for the number inflation in multicollinearity (since they are supposed to be statistically significant, which is not reflected in the regular MLR). 
 
-There is also some concern of Heteroscedasticity (not a contsant variance across residuals)
+There is also some concern of Heteroscedasticity (not a constant variance across residuals)
 ```{r}
 par(mfrow = c(1, 2))           
 
 plot(mlr_fit, which = 1) 
 
 ```
-The plot above shows some deviation to the constant horizontal line (indicating non constant variance).
+The plot above shows some deviation to the constant horizontal line (indicating nonconstant variance).
 
-Due to this, we need to switch to a new type of regression model for even more accurate results. We use a technique called K-folds cross validation, where the data is split into multiple subsets and is iterated more than once in order to account for the multicollinearity inflation which is indicated above, as well improving the model to see how accurately it can predict unseen data points. This involves putting our train/test data into matrices, and then running regularized models called Ridge and Lasso regression respectively. 
+Due to these issues, we need to switch to a new type of regression model for even more accurate results. We use a technique called K-fold cross validation, where the data is split into multiple subsets and is iterated more than once in order to account for the multicollinearity inflation + Heteroscedasticity, as well as improving the model to see how accurately it can predict unseen data points. This involves putting our train/test data into matrices, and then running regularized models called Ridge and Lasso regression, respectively. 
 
-Lasso regression accounts for the absolute value of the important coefficients and shrinks them using a penalty factor. Ridge regression accounts for the squared value of the coefficients and shrinks them with a similar penalty factor (all in the means of regularizing our data (also called hyper parameter tuning)). We use the glmnet package for this.
+Lasso regression accounts for the absolute value of the important coefficients and shrinks them using a penalty factor. Ridge regression accounts for the squared value of the coefficients and shrinks them with a similar penalty factor (all in the means of regularizing our data, also called hyperparameter tuning). We use the glmnet package for this.
 
 ```{r}
 # Prepare matrices
@@ -190,7 +190,7 @@ cat("Ridge RMSE:",  rmse(y_test, test_df$pred_ridge), "\n")
 cat("Lasso RMSE:",  rmse(y_test, test_df$pred_lasso), "\n")
 ```
 
-We do a Cross Validation of Ridge and Lasso regression to see which one is more accurate. As we can see, Ridge regression has a lower RMSE which is more accurate for our model, so we will plot the Cross validation curve. We get the RSME score from the Metrics Package.
+We do a cross-validation of Ridge and Lasso regression to see which one is more accurate. As we can see, Ridge regression has a lower RMSE which is more accurate for our model, so we will plot the cross-validation curve. We get the RSME score from the Metrics Package.
 
 ### Plotting Ridge regression CV plot
 
@@ -198,7 +198,7 @@ We do a Cross Validation of Ridge and Lasso regression to see which one is more 
 plot(cv_ridge)
 abline(v=log(best_ridge),col="red",lty=2)
 ```
-The cross validation ridge plot is shown above. According to "<https://bookdown.org/ssjackson300/Machine-Learning-Lecture-Notes/choosing-lambda.html>":
+The cross-validation ridge plot is shown above. According to "<https://bookdown.org/ssjackson300/Machine-Learning-Lecture-Notes/choosing-lambda.html>":
 
 "What is plotted is the estimated CV MSE for each value of (log)lambda on the x-axis. The dotted line on the far left indicates the value of lambda which minimizes CV error. The dotted line roughly in the middle of the x-axis indicates the 1-standard-error lambda- recall that this is the maximum value that lambda can take while still falling within the on standard error interval of the minimum-CV lambda. The second line of code has manually added a dot-dash horizontal line at the upper end of the 1-standard deviation interval of the MSE at the minimum-CV lambda to illustrate this point further". These plots can change with randomization according to our seed number.
 
